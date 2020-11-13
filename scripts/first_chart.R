@@ -23,6 +23,8 @@ top_5_products <- amazon_data %>%
 
 ggplot(top_5_products, aes(ScrapedIndexPrice, ProductName)) +
   geom_point(aes(color = ScrapedIndexVendor)) +
-  scale_x_continuous(breaks = seq(0, 75, 5)) +
+  scale_x_continuous(breaks = seq(0, 75, 5)) + 
+  labs(color = "Vendor") +
   xlab("Scraped Index Price") +
-  ylab("Product Name")
+  ylab("Product Name") 
+
