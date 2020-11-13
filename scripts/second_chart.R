@@ -18,23 +18,16 @@ amazon_data <- read.csv(
 
 # calculate the ratio of corrected price to Buy Box corrected price
 corrected_price_to_BBs_ratios <- amazon_data %>%
-  mutate(CorrectedToBBCorrectedRatio = amazon_data$CorrectedPrice / amazon_data$BBCorrectedPrice) %>%
+  mutate(CorrectedToBBCorrectedRatio = log(amazon_data$CorrectedPrice / amazon_data$BBCorrectedPrice)) %>%
   select(Index, CorrectedPrice, BBCorrectedPrice, CorrectedToBBCorrectedRatio, ScrapedIndexVendorType, BBVendorType)
 
+
+
+
+
 # create the Faceted histogram
-ggplot(data = corrected_price_to_BBs_ratios) +
-  geom_point(mapping = aes(x = Index , y = CorrectedToBBCorrectedRatio)) +
-  facet_wrap(~ScrapedIndexVendorType) +
-  ggtitle(paste("Disstribution of ",
-                sep = ""
-  )) +
-  xlab("Scraped Index of Products") +
-  ylab("Ratio")
+ggplot(data = corrected_price_to_BBs_ratios, aes(x = CorrectedToBBCorrectedRatio)) +
+  geom_histogram(binwidth = 0.1) +
+  facet_wrap(~ScrapedIndexVendorType, scales = "free_y") 
 
-# todo: color dots : == 1 / >1 / <1 
 
-# Simple Summary:
-# the chart suggests that most of BB product price is the same as amazon's own product's.
-# so BB product is more likely to be amazon's product?
-# FBA's price is trying to align with BBprice. or above.
-# but looking at other vendors', they would have many prices that's lower than BBprice.
