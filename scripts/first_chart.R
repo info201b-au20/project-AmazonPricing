@@ -27,4 +27,3 @@ ggplot(top_5_products, aes(ScrapedIndexPrice, ProductName)) +
   labs(color = "Vendor") +
   xlab("Scraped Index Price") +
   ylab("Product Name") 
-

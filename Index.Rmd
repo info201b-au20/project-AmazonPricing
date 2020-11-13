@@ -1,0 +1,75 @@
+---
+title: "index.Rmd"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Index.Rmd
+
+#Write an introductory paragraph explaining the domain/data set (feel free to borrow from the project proposal)
+
+The main dataset we're using, "Amazon Product Pricing", is about the 250 best selling Amazon products across a wide selection of categories. The data was collected over several weeks in the summer of 2016. For each of these best selling products, the pricing and shipping costs offered by multiple different vendors are recorded as well as the index of how that product is ranked among similar products sold by other vendors. The data consists of 6972 observations (products), and 12 columns that supply different information about each product. Creators of the dataset explain that they looked at 250 frequently purchased products over several weeks to see which ones were selected for the most prominent placement on Amazon's virtual shelves. The article by ProPublica that was written by the creators of the dataset, says that "about three quarters of the time, Amazon placed it's own products and those of companies that pay for its services in that position even when there were substantially cheaper offers available fromm others. By analyzing this dataset, we are able to make connections between the pricing and ranking of products on the Amazon platform. 
+
+#Write a summary paragraph that includes information calculated by your summary information function
+
+The summary information function gives us insight into the dataset that helps us recognize how many products are from Amazon directly, how many products are fulfilled by Amazon (meaning that Amazon provides storage, packaging, and shipping assistance to its' sellers), and the number of products that are unique. Our findings show that the total number of observations or products within the dataset is 6,973. Based on this number of observations, we found that the number of observations sold and distributed entirely by Amazon is 5,293 out of the 6,973 observations in the data set. The number of vendors that use "Fulfilled by Amazon" within our dataset is 470. Within the total number of observations, we found that there were 250 unique products. This signifies that throughout the entire dataset, there were 250 products that were then sold and distributed by either Amazon or fulfilled by Amazon. Throughout our analysis, we were also able to summarize that the largest difference between the cost on Amazon versus the cost in a user's cart after shipping is added is $33.12.
+
+#Render your table and describe pertinent observations found in it
+
+view(aggregate_table)
+
+Within this table, we are able to see what ratio is sold by each vendor type for each of the scraped indexes across 162 categories. The pertinent observations that we found in this table include that the ratios for each scraped index number which were "Sold and Fulfilled by Amazon" had the highest ratios. For each scraped index number, the products that were not sold and distributed by Amazon had the second highest ratios. Lastly, another observation based on this table is that for each scraped index number, products which were only fulfilled by Amazon had the lowest ratio out compared to the other two vendors. 
+
+#Describe the purpose of each chart (e.g., "this chart was intended to show the relationship between..."), render each chart, and describe pertinent observations found in each chart
+
+*First Chart:*
+
+For the first chart we decided to use a dot plot to show the relationship between price and vendor type. We displayed this chart by putting prices on the Y-axis and the vendor types on the X-axis. Our 3 Vendor types include fulfilled and distributed by Amazon, sold by company A and fulfilled by Amazon, and O: fulfilled and sold by a random company not associated with Amazon in any way. The five products that we included in this dot plot are the top 5 unique products, meaning the top 272 indexes. 
+
+ggplot(top_5_products, aes(ScrapedIndexPrice, ProductName)) +
+  geom_point(aes(color = ScrapedIndexVendor)) +
+  scale_x_continuous(breaks = seq(0, 75, 5)) + 
+  labs(color = "Vendor") +
+  xlab("Scraped Index Price") +
+  ylab("Product Name") 
+
+The pertinent observations that we found in this chart help us understand the variation in cost of the top 5 unique products. The first observation we have is that the Multiuse Pest Control Insecticide has the highest prices compared with the other four products. Another observation we had is that the Drug Testing Kit is sold by the highest number of vendors, and also has the largest variation in price where a majority of vendors sell this product at a low price, and three of them sell the product at a much larger price. This chart is helpful to our future data analysis because of how it helps us to understand the various price points unique products are sold at depending on which vendor is selling them. 
+
+*Second Chart:*
+
+For the second chart, we decided to do a faceted histogram to show the relationship between vendor type and the ratio between Corrected Price and Buy Box corrected price. By displaying the Scraped Index of Products on the X axis, and the ratio between these two different prices, we are able to see this relationship and how the distribution in price looks among each vendor (Amazon, Companies that are Fulfilled by Amazon through distribution, and Others that are sold and shipped independently from Amazon).
+
+ggplot(data = corrected_price_to_BBs_ratios) +
+  geom_point(mapping = aes(x = Index , y = CorrectedToBBCorrectedRatio)) +
+  facet_wrap(~ScrapedIndexVendorType) +
+  ggtitle(paste("Disstribution of ",
+                sep = ""
+  )) +
+  xlab("Scraped Index of Products") +
+  ylab("Ratio")
+  
+The pertinent observations that we have found in this chart help us understand the ratio between Corrected price and Buy Box corrected price (BB price) among each Vendor. The observations that we have found through creating this plot are that most of the BB Product Prices are the same as Amazon's own products. We found that when the ratio is less than 1, we know that the BB Corrected price is not the lowest price available. In addition, we also are able to see that the 'Other' vendor has some very high ratios, FBA has the next highest ratios, and Amazon has the lowest ratios between prices where they are almost all identical among products. 
+
+*Third Chart:* 
+
+For the third chart, we decided to use a stacked bar chart to show the relationship between vendor type and products. By using the stacked bar chart, we are able to see what percentage of the top 20 indexed products are fulfilled by each vendor type. This helps give us insight into the top products on Amazon, and how they are typically sold and distributed. 
+
+
+  top_20_index_ratios <- aggregate_table %>%
+  filter(ScrapedIndex <= 20)
+
+ggplot(top_20_index_ratios, aes(fill = BBVendorType, y = ratio,
+                                 x = ScrapedIndex)) +
+  geom_bar(position = "fill", stat = "identity") +
+  ggtitle(paste("Vendor Types for top 20 Indexed Products on Amazon ",
+    "across 162 Categories",
+    sep = ""
+  )) +
+  xlab("Scraped Index of Products") +
+  ylab("Percentage of Vendor Type")
+  
+The pertinent observations that we found from this chart include that at least 70% of each of these 20 indexed products are sold and fulfilled by Amazon. Additionally, the next highest percentage of vendor type across these 20 products was "Not sold or Fulfilled by Amazon", leaving vendors who were just fulfilled by Amazon to be the least likely vendor of these products.   
+

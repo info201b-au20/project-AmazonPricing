@@ -25,7 +25,7 @@ corrected_price_to_BBs_ratios <- amazon_data %>%
 ggplot(data = corrected_price_to_BBs_ratios) +
   geom_point(mapping = aes(x = Index , y = CorrectedToBBCorrectedRatio)) +
   facet_wrap(~ScrapedIndexVendorType) +
-  ggtitle(paste("Disstribution of ",
+  ggtitle(paste("Distribution of Price ratio of All Vendor Listings",
                 sep = ""
   )) +
   xlab("Scraped Index of Products") +
