@@ -9,32 +9,27 @@ amazon_data <- read.csv(
   )
 )
 summary_info <- list()
+
+#Calculate the total number of rows in the dataset
 summary_info$num_observations <- nrow(amazon_data)
 
+#calculate the largest difference between the cost on amazon web page vs cost
+#in the cart(after shipping has been added)
 summary_info$max_cost_difference <-amazon_data %>% 
  mutate(discrepancy = CorrectedPrice - ScrapedIndexPrice) %>% 
   filter(discrepancy == max(discrepancy, na.rm = T)) %>% 
   pull(discrepancy)
 
-summary_info$
-#Knowing that there are multiple vendors for each product(multiple entires for
-#each product), how many vendors of each unique product use "Filled by Amazon"
-#FBA?
-fab_product_count <- amazon_data %>% 
+#Calculate the total number of unique products in the database
+summary_info$num_unique_products <-amazon_data %>% 
   group_by(ProductName) %>% 
+  count(ProductName) %>% 
+  nrow()
+
+#calculates the total number of vendors in the database that use "Filled by
+#Amazon"(FBA)
+summary_info$total_num_FBA_vendor <- amazon_data %>% 
   filter(ScrapedIndexVendorType == "FBA") %>% 
-  count(ProductName)
-  #Sub-question: How many vendors vs the total number of vendors for each unique
-  #product use "Filled by Amazon" (FBA)?
-    total_vendors_per_product <- amazon_data %>% 
-      group_by(ProductName) %>% 
-      count(ProductName)
-    fba_vendors_vs_all_vendors <- total_vendors_per_product$n - fab_product_count$n
-  #* there are negative numbers in some of these entries because some products 
-  #* #do not use FBA at all
+  nrow()
 
-#Which products have a different price listed than when it is added to the cart?
-  #List the product, and the amount difference
-price_discrepancy <- 
-
-#
+summary_info$
