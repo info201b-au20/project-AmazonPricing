@@ -29,7 +29,10 @@ summary_info$num_unique_products <-amazon_data %>%
 #calculates the total number of vendors in the database that use "Filled by
 #Amazon"(FBA)
 summary_info$total_num_FBA_vendor <- amazon_data %>% 
-  filter(ScrapedIndexVendorType == "FBA") %>% 
+  filter(BBVendorType == "FBA") %>% 
   nrow()
 
-summary_info$
+#The total number of observations that have been sold and shipped by Amazon.
+summary_info$all_amazon <- amazon_data %>% 
+  filter(BBVendor == "Ships from and sold by Amazon.com.") %>% 
+  nrow()
