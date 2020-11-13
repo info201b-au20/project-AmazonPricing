@@ -1,8 +1,11 @@
-# How likely BBCorrectedPrice is (not) the lower price, based on different vendor type?
+# Amazon product pricing
+
+# How likely BBCorrectedPrice is (not) the lower price, based on different vendor type
+
 # Faceted histogram:
 # three categories by vendor type : Amazon, FBA, Other. (“ScrapedIndexVendortype”)
-# showing the distribution of “CorrectedPrice” / ”BBCorrectedPrice” ratio of all vendor listings.
-# If “CorrectedPrice”/”BBCorrectedPrice” Ratio < 1, BBCorrectedPrice is not the lower price in the listing.
+# showing the distribution of “CorrectedPrice” / ”BBCorrectedPrice” log ratio of all vendor listings.
+
 
 # Load the tidyverse package
 library("tidyverse")
@@ -16,18 +19,18 @@ amazon_data <- read.csv(
   )
 )
 
-# calculate the ratio of corrected price to Buy Box corrected price
+# calculate the log ratio of corrected price to Buy Box corrected price
 corrected_price_to_BBs_ratios <- amazon_data %>%
-  mutate(CorrectedToBBCorrectedRatio = log(amazon_data$CorrectedPrice / amazon_data$BBCorrectedPrice)) %>%
-  select(Index, CorrectedPrice, BBCorrectedPrice, CorrectedToBBCorrectedRatio, ScrapedIndexVendorType, BBVendorType)
+  mutate(PriceLogRatio = log(amazon_data$CorrectedPrice / amazon_data$BBCorrectedPrice)) %>%
+  select(Index, CorrectedPrice, BBCorrectedPrice, PriceLogRatio, ScrapedIndexVendorType, BBVendorType)
 
-
-
-
-
-# create the Faceted histogram
-ggplot(data = corrected_price_to_BBs_ratios, aes(x = CorrectedToBBCorrectedRatio)) +
-  geom_histogram(binwidth = 0.1) +
+# create the Faceted histogram 
+# x-axis is log ratio of corrected price to Buy Box corrected price
+# y-axis is the count of listings 
+# highlighted the Buy Box corrected price
+ggplot(data = corrected_price_to_BBs_ratios, aes(x = PriceLogRatio)) +
+  geom_histogram(binwidth = 0.1, aes(fill = (PriceLogRatio >= -0.05 & PriceLogRatio <= 0.05))) +
+  #scale_fill_manual(values = c(`TRUE` = "magenta4", `FALSE` = alpha("grey", 0.7))) +
   facet_wrap(~ScrapedIndexVendorType, scales = "free_y") 
 
 
