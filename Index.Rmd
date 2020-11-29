@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Index.Rmd
 
 
@@ -26,6 +27,17 @@ The main dataset we're using, "Amazon Product Pricing", is about the 250 best se
 #Write a summary paragraph that includes information calculated by your summary information function
 
 The summary information function gives us insight into the data set that helps us recognize how many products are from Amazon directly, how many products are fulfilled by Amazon (meaning that Amazon provides storage, packaging, and shipping assistance to its' sellers), and the number of products that are unique. Our findings show that the total number of observations or products within the dataset is 6,973. Based on this number of observations, we found that the number of observations sold and distributed entirely by Amazon is 5,293 out of the 6,973 observations in the data set. The number of vendors that use "Fulfilled by Amazon" within our data set is 470. Within the total number of observations, we found that there were 250 unique products. This signifies that throughout the entire data set, there were 250 products that were then sold and distributed by either Amazon or fulfilled by Amazon. Throughout our analysis, we were also able to summarize that the largest difference between the cost on Amazon versus the cost in a user's cart after shipping is added is $33.12.
+=======
+## Index.Rmd
+
+#Write an introductory paragraph explaining the domain/data set (feel free to borrow from the project proposal)
+
+The main dataset we're using, "Amazon Product Pricing", is about the 250 best selling Amazon products across a wide selection of categories. The data was collected over several weeks in the summer of 2016. For each of these best selling products, the pricing and shipping costs offered by multiple different vendors are recorded as well as the index of how that product is ranked among similar products sold by other vendors. The data consists of 6972 observations (products), and 12 columns that supply different information about each product. Creators of the dataset explain that they looked at 250 frequently purchased products over several weeks to see which ones were selected for the most prominent placement on Amazon's virtual shelves. The article by ProPublica that was written by the creators of the dataset, says that "about three quarters of the time, Amazon placed it's own products and those of companies that pay for its services in that position even when there were substantially cheaper offers available fromm others. By analyzing this dataset, we are able to make connections between the pricing and ranking of products on the Amazon platform. 
+
+#Write a summary paragraph that includes information calculated by your summary information function
+
+The summary information function gives us insight into the dataset that helps us recognize how many products are from Amazon directly, how many products are fulfilled by Amazon (meaning that Amazon provides storage, packaging, and shipping assistance to its' sellers), and the number of products that are unique. Our findings show that the total number of observations or products within the dataset is 6,973. Based on this number of observations, we found that the number of observations sold and distributed entirely by Amazon is 5,293 out of the 6,973 observations in the data set. The number of vendors that use "Fulfilled by Amazon" within our dataset is 470. Within the total number of observations, we found that there were 250 unique products. This signifies that throughout the entire dataset, there were 250 products that were then sold and distributed by either Amazon or fulfilled by Amazon. Throughout our analysis, we were also able to summarize that the largest difference between the cost on Amazon versus the cost in a user's cart after shipping is added is $33.12.
+>>>>>>> 9415e5faed496a54199acdfb1bfdaa516d113f55
 
 #Render your table and describe pertinent observations found in it
 
