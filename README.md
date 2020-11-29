@@ -1,98 +1,76 @@
-# Final Project
-## Domain of interest
+# Assignment 1: Protests
+The past few years in the United States, there has been a surge in protests in support of Black Lives Matter, gender equity, and other social issues. In this assignment, you'll work with data from [CountLove](https://countlove.org/) -- the same data often [cited](https://www.nytimes.com/2020/08/28/us/black-lives-matter-protest.html) by the New York Times -- to learn more about demonstrations over the past few years. 
 
-#### Why are you interested in this field/domain?
+By completing the assignment, you will demonstrate the following skills:
 
-The domain that our group is most interested in is e-commerce. We’re interested in this field because of the prevalence this domain has in our current lives. This domain has a strong correlation with how technology is represented in our lives today. As a group, we wanted to work with data that was relevant to us so that we could gain a deeper understanding of the subject, in our case: retail and e-commerce. We are focusing on “Amazon’s anti-competitive practices and pricing”, as we found this data intriguing with consideration towards Amazon’s popularity and power within the e-commerce industry. By diving into this data set, we hope to learn more about the data Amazon primarily uses to their own advantage, as well as how they support merchants’ businesses.
+- Use of **version control** for managing your code
+- Declaring document rendering using **markdown** syntax
+- Foundational programming skills in R. 
 
-#### What other examples of data driven projects have you found related to this domain (share at least 3)?
 
-Data driven projects related to our domain, e-commerce, include easy online payments, product recommendation system, the Churn Model, and price optimization. These projects are used within e-commerce companies in order to understand their users in the best way possible and assure they will turn into repeat consumers. Easy online payments are an important factor with e-commerce to assure that user experience is seamless and safe. The product recommendation system also helps to improve user experience as it collects data about a user’s purchases and recommends products that the consumer may be interested in. The Churn model is another way to stay relevant in the industry as it uses several strategies to detect consumers that may additionally use different e-commerce platforms and take extra action steps to assure the consumer will return to use only their specific platform. Lastly, price optimization is an example of a data driven project related to e-commerce as it uses data to predict what price will be in the optimized range for consumers to return while allowing the company to receive the highest profit possible. <https://www.amaboston.org/blog/10-data-science-projects-e-commerce-businesses-are-using/>
 
-#### What data-driven questions do you hope to answer about this domain (share at least 3)?
+## Background Research
+Before diving into this (or any) dataset, it's important to have _domain familiarity_ (i.e., to know something about the topic). As preparation, I'm asking that you read **three articles** about protests in the U.S., and provide a brief 1 - 2 sentence summary or takeaway from each one. 
 
-Throughout the course of this quarter, we hope to answer the following questions about our domain. We want to answer, “What percentage of the products at Amazon are sold from a third-party seller versus Amazon?”, “How does Amazon’s pricing algorithm help customers, third party sellers, and Amazon itself?”, and “What types of products does Amazon make themselves vs. what types of products do they prefer third party sellers for?”. In addition to these questions, we want to also look into how Amazon potentially manipulates the order of their products. Due to this goal, we also want to answer the questions: “Does Amazon rank their own products above similarly priced products sold by third party vendors?” and “Does amazon price their products lower than similar products sold by third party vendors?”. Through our analysis of this dataset, we hope to gain insight into what adjustments or data driven projects the company uses to set itself apart from additional e-commerce opportunities.
+In the section below, create an **unordered list** of the three articles you found. Make sure to provide an appropriate markdown link (_not_ just the URL) to the article in addition to your 1 - 2 sentence summary. 
 
-## Finding Data
+* "A week that shook a nation: anger burns as power of protests leaves Trump exposed"
+    + This article speaks on the prevalence of the largest protests in the U.S. since the 1960s. With various participants such as George Floyd's death, Coronavirus, unemployment, a failing economy, and policy brutality and racism, Trump's contradictory approaches to solving these issues are evaluated.
+    + [The Guardian](https://www.theguardian.com/us-news/2020/jun/06/america-george-floyd-protests-trump)
+    
+* "Police declare riots as protests turn violent in cities nationwide; 1 demonstrator dead in Austin"
+    + In this article, the author describes the transition from peaceful protests to violent riots that have occurred throughout the country, specifying events that happened in Oregon, California, Washington, and Virginia. During this specification, the author describes the most violent events which occurred in each of these states. 
+    + [ABC News](https://abcnews.go.com/US/police-declare-riots-protests-turn-violent-cities-nationwide/story?id=71994983) 
+    
+* "US must address deep-seated grievances to move beyond history of racism and violence"
+    + One takeaway I have from this article is the importance behind breaking the deep cycle of harmful behavior that's occurring in the U.S. considering recent events of COVID-19 and police killings involved with the Black Lives Matter movement.
+    + [UN News](https://news.un.org/en/story/2020/06/1065572)
 
-### Source 1: Amazon product pricing
+## Accompanying Image 
+In this section, please **display one image** to accompany your text, and describe _why_ you included it (~2 - 3 sentences). This will require that you download an image into your project folder. In your description, use **bold** and _italics_ (at least once, for practice) to emphasize some of your points. 
 
-#### Where did you download the data?
+![I included this image because of it's prevlaence to my current location in Seattle, WA, and because of the power behind the artwork that has been created here during the _Black Lives Matter movement_. I chose this specific image because of my **passion for art**, and the message behind why this piece was created. This has been a year of hopeful change considering out current status as a country. When I learned about this piece, I was excited to see it in person and witness this work that many artists of color worked together to create and **send this message that needs to be heard**.](path/to/blacklivesmatter.jpg)
 
-We downloaded the data from the ProPublica Datastore from this link: <https://www.propublica.org/datastore/dataset/amazon-pricing-algorithm-data-set>
+## Analysis
+At this point, you should open up your `analysis.R` script to begin working with the data. The script will guide you through an initial analysis of the data. Throughout the script, there are prompts labeled **Reflection**. Please write 1 - 2 sentences for each of these reflections below:
 
-#### How was the data collected or generated? Make sure to explain who collected the data (not necessarily the same people that host the data).
+- What does the difference between the mean and the median tell you about the *distribution* of the data?
 
-ProPublica researchers wrote a software program to scrape data from Amazon’s website for 250 best selling products across a wide selection of categories. For each of these 250 products, the software program scraped data from the suggested product’s listing page as well as the other listings from other vendors offering the same product. For every product, the program collected the scraped price, and calculated the combined price plus shipping. Both of these prices are different columns in the data set.
+The difference between the mean and median tells me that the data for 'num_attendees' has a *skewed distribution*. The median in this case would most likely be the best measure of central tendency as there is a wide range of attendees that attended the protests in the dataset. 
 
-#### Who or what the data is about?
+- Does the number of protests in Washington surprise you? Why or why not?
 
-The data is about the 250 best selling Amazon products across a wide selection of categories. The data was collected over several weeks in the summer of 2016. For each of these best selling products, the pricing and shipping costs offered by multiple different vendors are recorded as well as the index of how that product is ranked among similar products sold by other vendors.  
+No, the number of protests in Washington doesn't surprise me because of how prevalent going to protests this year has been in the UW community. Since Seattle tends to be very active with current trends, and has a very large population that enjoys standing up for current issues, I expected there to be many protests in Washington. Since the total number of protests in Washington includes cities aside from Seattle, I was expecting this high number.
 
-#### How many observations (rows) are in your data?
+- Looking at the `state_table` variable, what data quality issues do you notice, and how would you use that to change your analysis (no need to actually change your analysis)?
 
-6972
+Some quality issues that I notice in the 'state_table' are that some of the state abbreviations are lowercase. Additionally, some of the abbreviations have just one letter that is lowercase. This looks unprofessional and is confusing while looking at the table, as it looks like it's giving you different information since letters are not all visually the same. 
 
-#### How many features (columns) are in the data?
+- Does the change in the number of protests from 2019 to 2020 surprise you? Why or why not?
 
-13
+No, the change in the number of protests from 2019 to 2020 does not surprise me because of the sequence of events that have happened since the beginning of 2020. With the crazy amount of issues brought to society's attention this year, I am not surprised that people have starting protesting more. Especially with the prevalence of the Black Lives Matter movement, and the political issues that are happening this year, the number of protests is very valid (especially considering how many people have strong opinions about the issues brought up this year).
 
-#### What questions (from above) can be answered using the data in this dataset?
+- Do a bit of research. Find at least *two specific policies* that have been changed as a result of protests in 2020. These may be at the city, state, or University level. Please provide a basic summary, as well as a link to each article.
 
-  - How does Amazon’s pricing algorithm help customers, third party sellers, and Amazon itself?
-  - Does Amazon rank their own products above similarly priced products sold by third party vendors?
-  - Does amazon price their products lower than similar products sold by third party vendors.
+Due to 2020 protests, two policies that have changed include Denver's ban on chokeholds and a new requirement that SWAT officers "turn on their body cameras during tactical operations". These policies are at a state level in Colorado. Due to the prevalence of violence acted on by police officers and SWAT teams during protests over the course of the year, this change in policy is one step closer to hopefully limiting police brutality, especially towards innocent protestors. 
+  + [Vox](https://www.vox.com/2020/6/10/21283966/protests-george-floyd-police-reform-policy) 
 
-### Source 2: Amazon predatory pricing
+- Take a look (`View()`) your `high_level_table` variable. What picture does this paint of the U.S.?
 
-#### Where did you download the data?
+Although I couldn't fully create the table (as I couldn't figure it out), I can imagine the number of protests for each "purpose". From my personal knowledge, the purposes for the protests that are most common are those that I am not personally surprised about. After organizing the data according to purpose in a table, I was able to see that the majority of these protests were for Civil Rights. This is not surprising considering the movements that have occurred just during 2020. 
 
-<https://data.world/data-hut/predatory-pricing-data-from-amazon>
 
-#### How was the data collected or generated? Make sure to explain who collected the data (not necessarily the same people that host the data).
+## Final Thoughts
+When you are finished, with your analysis, please answer the following questions in 1-2 sentences each. 
 
-The data was collected by employees at Datahut. Datahut is a cloud based data extraction platform that helps enterprises get structured data from websites with web scraping. On March 9, 2020, they used Datahut to scrape data from product listings for surgical masks on Amazon India. Datahut’s platform found 350 product listings of surgical masks, and 141 of them did not have pricing data because they were out of stock. They used the Talend data prep tool to remove these out of stock listings and clean the data.
+- What about the analysis surprised you?
 
-#### Who or what the data is about?
+Throughout this analysis, I was surprised by how many different areas of each state had protests. I hadn't considered the smaller towns that still had protests at smaller sizes. Throughout this year, I typically only think about bigger cities that hold protests for people from all over to attend. I hadn't considered these smaller cities, so this was something that surprised me while analyzing the data.
 
-The data is about the pricing of surgical masks on Amazon India in March 2020, during COVID-19. The data notes the date the product was first listed on Amazon, the MRP of the surgical mask, the sale price, and the discount percentage. The MRP, maximum retail price, is a manufacturer calculated price that is the highest price that can be charged for a product sold in India. All products sold in India must be marked with their MRP. On eCommerce sites like Amazon India, the sale price is usually a slightly discounted price from the MRP.  Nearly half of the surgical mask products have a discount of 50% or more. Amazon India was flagged for predatory pricing during COVID 19.  Predatory pricing, which is illegal in India, is the sale of products or services at a price below the cost of production, with a view to reduce or eliminate competition. This dataset helps provide insight into Amazon’s supposed “Predatory Pricing” practices during Covid-19 in India.
+- What parts of this analysis did you find challenging?
 
-#### How many observations (rows) are in your data?
+Creating a higher level summary of the purpose of the protests was something I found very challenging. I wasn't able to fully complete this part as I couldn't figure it out. Figuring out how to extract everything except for the parentheses was very challenging and led me to give up. Additionally, trying to do some parts of the assignment were challenging at first, but I have learned a lot just through completing this assignment and found that tasks got easier as I went through.
 
-209
+- What types of analysis do you wish you were able to do with the dataset, but currently don't have the technical skills to do?
 
-#### How many features (columns) are in the data?
-
-12
-
-#### What questions (from above) can be answered using the data in this dataset?
-
-  - How does Amazon’s pricing algorithm help customers, third party sellers, and Amazon itself?
-  - Does amazon price their products lower than similar products sold by third party vendors?
-
-### Source 3: Amazon Product Dataset 2020 01/01/2020-01/31/2020
-
-#### Where did you download the data?
-
-This data was downloaded from the following website <https://data.world/promptcloud/amazon-product-dataset-2020/workspace/project-summary?agentid=promptcloud&datasetid=amazon-product-dataset-2020>
-
-#### How was the data collected or generated? Make sure to explain who collected the data (not necessarily the same people that host the data).
-
-This dataset was collected by teams at PromptCloud. Next, the data was cleaned and stored on DataStocks website. DataStock was started by PromptCloud in 2018 as a complete data warehousing software, where customers and clients can buy data in usable formats. The full dataset cost 400 dollars, so we are using a sample of the dataset that is hosted on data.world.
-
-#### Who or what the data is about?
-
-This dataset contains a sample of data about 10K Amazon products in January 2020 across a wide selection of categories. For each product, several important details are recorded such as the product name, brand name, category, selling price, and if the product is sold by Amazon or a third party seller.
-
-#### How many observations (rows) are in your data?
-
-10,002
-
-#### How many features (columns) are in the data?
-
-28
-
-#### What questions (from above) can be answered using the data in this dataset?
-
-  - What percentage of the products on Amazon are sold from a third-party seller versus by Amazon?
-  - What types of products does Amazon make themselves vs what types of products do they prefer third party sellers for?
+One type of analysis I wish I was able to do with the dataset is learn about the media influence that these protests had and how many of the participants influenced the prevalence of protest topics throughout the media. Another type of analysis I wish I was able to do is learn the familiarity participants had on the protest topic. Knowing this would give a lot of insight on what participants' influence looked like and how this affected others to attend because of media prevalence.
