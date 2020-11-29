@@ -10,7 +10,7 @@ amazon_data <- read.csv(
   )
 )
 
-# First Chart
+## First Chart
 
 # Check the number of total unique products is 250
 check <- amazon_data %>%
@@ -31,7 +31,7 @@ ggplot(top_5_products, aes(ScrapedIndexPrice, ProductName)) +
   ylab("Product Name") 
 
 
-# Second Chart
+## Second Chart
 
 # Load Amazon 250 best selling products data from data downloaded in Github
 amazon_data <- read.csv(
@@ -65,8 +65,8 @@ ggplot(data = corrected_price_to_BBs_ratios) +
 # FBA's price is trying to align with BBprice. or above.
 # but looking at other vendors', they would have many prices that's lower than BBprice.
 
-  mutate(PriceLogRatio = log(amazon_data$CorrectedPrice / amazon_data$BBCorrectedPrice)) %>%
-  select(Index, CorrectedPrice, BBCorrectedPrice, PriceLogRatio, ScrapedIndexVendorType, BBVendorType)
+mutate(PriceLogRatio = log(amazon_data$CorrectedPrice / amazon_data$BBCorrectedPrice)) %>%
+select(Index, CorrectedPrice, BBCorrectedPrice, PriceLogRatio, ScrapedIndexVendorType, BBVendorType)
 
 # create the Faceted histogram 
 # x-axis is log ratio of corrected price to Buy Box corrected price
@@ -75,9 +75,10 @@ ggplot(data = corrected_price_to_BBs_ratios) +
 ggplot(data = corrected_price_to_BBs_ratios, aes(x = PriceLogRatio)) +
   geom_histogram(binwidth = 0.1, aes(fill = (PriceLogRatio >= -0.05 & PriceLogRatio <= 0.05))) +
   #scale_fill_manual(values = c(`TRUE` = "magenta4", `FALSE` = alpha("grey", 0.7))) +
-  facet_wrap(~ScrapedIndexVendorType, scales = "free_y") 
+  facet_wrap(~ScrapedIndexVendorType, scales = "free_y")
 
-# Third Chart
+
+## Third Chart
 
 # create a dataset
 # Load data from GitHub
@@ -97,7 +98,7 @@ ggplot(top_20_index_ratios, aes(fill = BBVendorType, y = ratio,
   ylab("Percentage of Vendor Type")
 
 
-# Aggregate Table
+## Aggregate Table
 
 get_ratio_of_vendor <- function(scraped_index, vendor) {
   if (vendor == "Amazon") {
@@ -148,7 +149,8 @@ aggregate_table$BBVendorType[aggregate_table$BBVendorType == "FBA"] <-
 aggregate_table$BBVendorType[aggregate_table$BBVendorType == "O"] <-
   "Not sold or Fulfilled by Amazon"
 
-# Summary Information
+
+## Summary Information
 
 # Load dataset from Github
 amazon_data <- read.csv(
