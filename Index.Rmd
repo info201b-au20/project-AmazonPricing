@@ -1,8 +1,10 @@
 ---
 title: "Index.Rmd"
-author: "Megan Clay"
+author: "Megan Clay, Sydney Smith, Alexis Macaskill, Yutian Pan"
 date: "11/29/2020"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -12,15 +14,15 @@ source("analysis.R")
 
 [Original Data Source](https://www.propublica.org/datastore/dataset/amazon-pricing-algorithm-data-set)
 
-## Introduction to Amazon Product Pricing
+# Introduction to Amazon Product Pricing
 
 The main dataset we're using, "Amazon Product Pricing", is about the 250 best selling Amazon products across a wide selection of categories. The data was collected over several weeks in the summer of 2016. For each of these best selling products, the pricing and shipping costs offered by multiple different vendors are recorded as well as the index of how that product is ranked among similar products sold by other vendors. The data consists of 6972 observations (products), and 12 columns that supply different information about each product. Creators of the dataset explain that they looked at 250 frequently purchased products over several weeks to see which ones were selected for the most prominent placement on Amazon's virtual shelves. The article by ProPublica that was written by the creators of the dataset, says that "about three quarters of the time, Amazon placed it's own products and those of companies that pay for its services in that position even when there were substantially cheaper offers available fromm others. By analyzing this dataset, we are able to make connections between the pricing and ranking of products on the Amazon platform. 
 
-## Summary of Amazon Product Pricing
+# Summary of Amazon Product Pricing
 
 The summary information function gives us insight into the dataset that helps us recognize how many products are from Amazon directly, how many products are fulfilled by Amazon (meaning that Amazon provides storage, packaging, and shipping assistance to its' sellers), and the number of products that are unique. Our findings show that the total number of observations or products within the dataset is 6,973. Based on this number of observations, we found that the number of observations sold and distributed entirely by Amazon is 5,293 out of the 6,973 observations in the data set. The number of vendors that use "Fulfilled by Amazon" within our dataset is 470. Within the total number of observations, we found that there were 250 unique products. This signifies that throughout the entire dataset, there were 250 products that were then sold and distributed by either Amazon or fulfilled by Amazon. Throughout our analysis, we were also able to summarize that the largest difference between the cost on Amazon versus the cost in a user's cart after shipping is added is $33.12.
 
-## Aggregate Table
+# Aggregate Table
 
 ```{r, echo = FALSE, warning=FALSE}
 library("knitr")
@@ -30,9 +32,9 @@ kable(aggregate_table, col.names = c("Amazon", "FBA", "0"))
 
 Within this table, we are able to see what ratio is sold by each vendor type for each of the scraped indexes across 162 categories. The pertinent observations that we found in this table include that the ratios for each scraped index number which were "Sold and Fulfilled by Amazon" had the highest ratios. For each scraped index number, the products that were not sold and distributed by Amazon had the second highest ratios. Lastly, another observation based on this table is that for each scraped index number, products which were only fulfilled by Amazon had the lowest ratio out compared to the other two vendors. 
 
-## Chart Descriptions
+# Chart Descriptions
 
-# First Chart
+## First Chart
 
 ```{r first chart, echo=FALSE, warning=FALSE}
 library("ggplot2")
@@ -45,7 +47,7 @@ For the first chart we decided to use a dot plot to show the relationship betwee
 
 The pertinent observations that we found in this chart help us understand the variation in cost of the top 3 unique products. The first observation we have is that the 2wayz Full Metal Body Garden Hose Splitetr has the highest prices compared with the other two products. Another observation we had is that the Drug Testing Kit is sold by the highest number of vendors, and also has the largest variation in price where a majority of vendors sell this product at a low price, and three of them sell the product at a much larger price. This chart is helpful to our future data analysis because of how it helps us to understand the various price points unique products are sold at depending on which vendor is selling them. 
 
-# Second Chart
+## Second Chart
 
 ```{r second_chart, echo=FALSE, warning=FALSE}
 plot(second_chart)
@@ -56,7 +58,7 @@ For the second chart, we decided to do a faceted histogram to show the relations
 
 The pertinent observations that we have found in this chart help us understand the ratio between Corrected price and Buy Box corrected price (BB price) among each Vendor. The observations that we have found through creating this plot are that most of the BB Product Prices are the same as Amazon's own products. We found that when the ratio is less than 1, we know that the BB Corrected price is not the lowest price available. In addition, we also are able to see that the 'Other' vendor has some very high ratios, FBA has the next highest ratios, and Amazon has the lowest ratios between prices where they are almost all identical among products. 
 
-# Third Chart
+## Third Chart
 
 ```{r third chart, echo = FALSE, warning=FALSE}
 library(ggplot2)
