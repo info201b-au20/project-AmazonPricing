@@ -3,8 +3,8 @@ title: "Index.Rmd"
 author: "Megan Clay, Sydney Smith, Alexis Macaskill, Yutian Pan"
 date: "11/29/2020"
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
