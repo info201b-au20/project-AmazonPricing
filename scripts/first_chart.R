@@ -8,13 +8,13 @@ check <- amazon_data %>%
   group_by(ProductName) %>%
   count(unique(ProductName))
 
-# We will be examining the top 5 unique products which means the top 272 Indexes
-top_5_products <- amazon_data %>%
-  filter(Index <= 44) %>% mutate(ProductName = strtrim(ProductName,51))
+# We will be examining the top 3 unique products which means the top 272 Indexes
+top_3_products <- amazon_data %>%
+  filter(Index <= 20) %>% mutate(ProductName = strtrim(ProductName,30))
 
 # Create a dot plot that shows the variation of cost within the top 5 Products
 
-ggplot(top_5_products, aes(ScrapedIndexPrice, ProductName)) +
+first_chart<- ggplot(top_3_products, aes(ScrapedIndexPrice, ProductName)) +
   geom_point(aes(color = ScrapedIndexVendor)) +
   scale_x_continuous(breaks = seq(0, 75, 5)) + 
   labs(color = "Vendor") +
