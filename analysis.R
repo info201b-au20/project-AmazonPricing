@@ -13,53 +13,68 @@ check <- amazon_data %>%
 
 # We will be examining the top 3 unique products which means the top 272 Indexes
 top_3_products <- amazon_data %>%
-  filter(Index <= 20) %>% mutate(ProductName = strtrim(ProductName,30))
+  filter(Index <= 20) %>%
+  mutate(ProductName = strtrim(ProductName, 30))
 
 # Create a dot plot that shows the variation of cost within the top 5 Products
 
-first_chart<- ggplot(top_3_products, aes(ScrapedIndexPrice, ProductName)) +
+first_chart <- ggplot(top_3_products, aes(ScrapedIndexPrice, ProductName)) +
   geom_point(aes(color = ScrapedIndexVendor)) +
-  scale_x_continuous(breaks = seq(0, 75, 5)) + 
+  scale_x_continuous(breaks = seq(0, 75, 5)) +
   labs(color = "Vendor") +
   xlab("Scraped Index Price") +
-  ylab("Product Name") 
+  ylab("Product Name")
 
 
 ## Second Chart
 
 # calculate the log ratio of corrected price to Buy Box corrected price
 corrected_price_to_BBs_ratios <- amazon_data %>%
-mutate(CorrectedToBBCorrectedRatio = amazon_data$CorrectedPrice / amazon_data$BBCorrectedPrice) %>%
-  select(Index, CorrectedPrice, BBCorrectedPrice, CorrectedToBBCorrectedRatio, ScrapedIndexVendorType, BBVendorType)
+  mutate(
+    CorrectedToBBCorrectedRatio =
+      amazon_data$CorrectedPrice / amazon_data$BBCorrectedPrice
+  ) %>%
+  select(
+    Index, CorrectedPrice, BBCorrectedPrice, CorrectedToBBCorrectedRatio,
+    ScrapedIndexVendorType, BBVendorType
+  )
 
 # create the Faceted histogram
-second_chart<- ggplot(data = corrected_price_to_BBs_ratios) +
-  geom_point(mapping = aes(x = Index , y = CorrectedToBBCorrectedRatio)) +
+second_chart <- ggplot(data = corrected_price_to_BBs_ratios) +
+  geom_point(mapping = aes(x = Index, y = CorrectedToBBCorrectedRatio)) +
   facet_wrap(~ScrapedIndexVendorType) +
   ggtitle(paste("Distribution of Price ratio of All Vendor Listings",
-                sep = ""
+    sep = ""
   )) +
   xlab("Scraped Index of Products") +
   ylab("Ratio")
 
-# todo: color dots : == 1 / >1 / <1 
-
+# todo: color dots : == 1 / >1 / <1
 # Simple Summary:
-# the chart suggests that most of BB product price is the same as amazon's own product's.
+# the chart suggests that most of BB product price is the same
+# as amazon's own product's.
 # so BB product is more likely to be amazon's product?
-# FBA's price is trying to align with BBprice. or above.
-# but looking at other vendors', they would have many prices that's lower than BBprice.
-corrected_price_to_BBs_ratios <- corrected_price_to_BBs_ratios %>% 
-mutate(PriceLogRatio = log(amazon_data$CorrectedPrice / amazon_data$BBCorrectedPrice)) %>%
-select(Index, CorrectedPrice, BBCorrectedPrice, PriceLogRatio, ScrapedIndexVendorType, BBVendorType)
+# FBA's price is trying to align with BBprice. or above.but looking at other
+# vendors', they would have many prices that's lower than BBprice.
+corrected_price_to_BBs_ratios <- corrected_price_to_BBs_ratios %>%
+  mutate(
+    PriceLogRatio =
+      log(amazon_data$CorrectedPrice / amazon_data$BBCorrectedPrice)
+  ) %>%
+  select(
+    Index, CorrectedPrice, BBCorrectedPrice, PriceLogRatio,
+    ScrapedIndexVendorType, BBVendorType
+  )
 
-# create the Faceted histogram 
+# create the Faceted histogram
 # x-axis is log ratio of corrected price to Buy Box corrected price
-# y-axis is the count of listings 
+# y-axis is the count of listings
 # highlighted the Buy Box corrected price
 ggplot(data = corrected_price_to_BBs_ratios, aes(x = PriceLogRatio)) +
-  geom_histogram(binwidth = 0.1, aes(fill = (PriceLogRatio >= -0.05 & PriceLogRatio <= 0.05))) +
-  #scale_fill_manual(values = c(`TRUE` = "magenta4", `FALSE` = alpha("grey", 0.7))) +
+  geom_histogram(
+    binwidth = 0.1,
+    aes(fill = (PriceLogRatio >= -0.05 & PriceLogRatio <= 0.05))
+  ) +
   facet_wrap(~ScrapedIndexVendorType, scales = "free_y")
 
 
@@ -72,12 +87,14 @@ source("scripts/aggregate_table.R")
 top_20_index_ratios <- aggregate_table %>%
   filter(ScrapedIndex <= 20)
 
-third_chart<- ggplot(top_20_index_ratios, aes(fill = BBVendorType, y = ratio,
-                                x = ScrapedIndex)) +
+third_chart <- ggplot(top_20_index_ratios, aes(
+  fill = BBVendorType, y = ratio,
+  x = ScrapedIndex
+)) +
   geom_bar(position = "fill", stat = "identity") +
   ggtitle(paste("Vendor Types for top 20 Indexed Products on Amazon ",
-                "across 162 Categories",
-                sep = ""
+    "across 162 Categories",
+    sep = ""
   )) +
   xlab("Scraped Index of Products") +
   ylab("Percentage of Vendor Type")
@@ -88,27 +105,27 @@ third_chart<- ggplot(top_20_index_ratios, aes(fill = BBVendorType, y = ratio,
 get_ratio_of_vendor <- function(scraped_index, vendor) {
   if (vendor == "Amazon") {
     nrow(amazon_data %>%
-           filter(BBVendorType == "Amazon") %>%
-           filter(ScrapedIndex == scraped_index)) / 250
+      filter(BBVendorType == "Amazon") %>%
+      filter(ScrapedIndex == scraped_index)) / 250
   }
   else if (vendor == "FBA") {
     nrow(amazon_data %>%
-           filter(BBVendorType == "FBA") %>%
-           filter(ScrapedIndex == scraped_index)) / 250
+      filter(BBVendorType == "FBA") %>%
+      filter(ScrapedIndex == scraped_index)) / 250
   } else {
     nrow(amazon_data %>%
-           filter(BBVendorType == "O") %>%
-           filter(ScrapedIndex == scraped_index)) / 250
+      filter(BBVendorType == "O") %>%
+      filter(ScrapedIndex == scraped_index)) / 250
   }
 }
 
 vendor_ratios_for_index <- function(index) {
   return(amazon_data %>%
-           filter(ScrapedIndex == index) %>%
-           group_by(BBVendorType) %>%
-           summarize(ratio = get_ratio_of_vendor(index, BBVendorType)) %>%
-           mutate(ScrapedIndex = index) %>%
-           select(ScrapedIndex, BBVendorType, ratio))
+    filter(ScrapedIndex == index) %>%
+    group_by(BBVendorType) %>%
+    summarize(ratio = get_ratio_of_vendor(index, BBVendorType)) %>%
+    mutate(ScrapedIndex = index) %>%
+    select(ScrapedIndex, BBVendorType, ratio))
 }
 
 ratios_for_all_products <- function(aggr_table) {
