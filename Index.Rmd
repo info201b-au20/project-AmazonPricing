@@ -5,11 +5,10 @@ date: "11/29/2020"
 output: html_document
 ---
 
-```{r setup, include=TRUE}
+```{r setup, include=FALSE}
 source("analysis.R")
 ```
 
-library("knitr")
 
 [Original Data Source](https://www.propublica.org/datastore/dataset/amazon-pricing-algorithm-data-set)
 
@@ -23,11 +22,10 @@ The summary information function gives us insight into the dataset that helps us
 
 ## Aggregate Table
 
-```{r}
+```{r, echo = FALSE, warning=FALSE}
 library("knitr")
 
-kable(aggretate_table, 
-      col.names = c("Amazon", "FBA", "0"))
+kable(aggregate_table, col.names = c("Amazon", "FBA", "0"))
 ```
 
 Within this table, we are able to see what ratio is sold by each vendor type for each of the scraped indexes across 162 categories. The pertinent observations that we found in this table include that the ratios for each scraped index number which were "Sold and Fulfilled by Amazon" had the highest ratios. For each scraped index number, the products that were not sold and distributed by Amazon had the second highest ratios. Lastly, another observation based on this table is that for each scraped index number, products which were only fulfilled by Amazon had the lowest ratio out compared to the other two vendors. 
@@ -36,20 +34,20 @@ Within this table, we are able to see what ratio is sold by each vendor type for
 
 # First Chart
 
-```{r first chart, echo=FALSE}
+```{r first chart, echo=FALSE, warning=FALSE}
 library("ggplot2")
 
 plot(first_chart)
 
 ```
 
-For the first chart we decided to use a dot plot to show the relationship between price and vendor type. We displayed this chart by putting prices on the Y-axis and the vendor types on the X-axis. Our 3 Vendor types include fulfilled and distributed by Amazon, sold by company A and fulfilled by Amazon, and O: fulfilled and sold by a random company not associated with Amazon in any way. The five products that we included in this dot plot are the top 5 unique products, meaning the top 272 indexes. 
+For the first chart we decided to use a dot plot to show the relationship between price and vendor type. We displayed this chart by putting prices on the Y-axis and the vendor types on the X-axis. Our 3 Vendor types include fulfilled and distributed by Amazon, sold by company A and fulfilled by Amazon, and O: fulfilled and sold by a random company not associated with Amazon in any way. The three products that we included in this dot plot are the top 3 unique products, meaning the top 20 indexes. 
 
-The pertinent observations that we found in this chart help us understand the variation in cost of the top 5 unique products. The first observation we have is that the Multiuse Pest Control Insecticide has the highest prices compared with the other four products. Another observation we had is that the Drug Testing Kit is sold by the highest number of vendors, and also has the largest variation in price where a majority of vendors sell this product at a low price, and three of them sell the product at a much larger price. This chart is helpful to our future data analysis because of how it helps us to understand the various price points unique products are sold at depending on which vendor is selling them. 
+The pertinent observations that we found in this chart help us understand the variation in cost of the top 3 unique products. The first observation we have is that the 2wayz Full Metal Body Garden Hose Splitetr has the highest prices compared with the other two products. Another observation we had is that the Drug Testing Kit is sold by the highest number of vendors, and also has the largest variation in price where a majority of vendors sell this product at a low price, and three of them sell the product at a much larger price. This chart is helpful to our future data analysis because of how it helps us to understand the various price points unique products are sold at depending on which vendor is selling them. 
 
 # Second Chart
 
-```{r second_chart, echo=FALSE}
+```{r second_chart, echo=FALSE, warning=FALSE}
 plot(second_chart)
 
 ```
@@ -60,8 +58,9 @@ The pertinent observations that we have found in this chart help us understand t
 
 # Third Chart
 
-```{r third chart, echo = FALSE}
-plot(top_20_index_ratios)
+```{r third chart, echo = FALSE, warning=FALSE}
+library(ggplot2)
+plot(third_chart)
 
 ```
 
