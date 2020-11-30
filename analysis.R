@@ -2,13 +2,7 @@ library(tidyverse)
 
 # Load the data from GitHub
 
-amazon_data <- read.csv(
-  paste("https://raw.githubusercontent.com/info201b-au20/project-",
-        "AmazonPricing/gh-pages/data/Amazon-Ranking-Analysis.csv?token=",
-        "AKQ3B6Q3UEQDBPM4IBQS3B27W2R5W",
-        sep = ""
-  )
-)
+amazon_data <- read.csv("https://raw.githubusercontent.com/info201b-au20/project-AmazonPricing/gh-pages/data/Amazon-Ranking-Analysis.csv?token=ARIOKKKUVW5AWQDWHRFCD427ZXB26")
 
 ## First Chart
 
@@ -17,13 +11,13 @@ check <- amazon_data %>%
   group_by(ProductName) %>%
   count(unique(ProductName))
 
-# We will be examining the top 5 unique products which means the top 272 Indexes
-top_5_products <- amazon_data %>%
-  filter(Index <= 44)
+# We will be examining the top 3 unique products which means the top 272 Indexes
+top_3_products <- amazon_data %>%
+  filter(Index <= 20) %>% mutate(ProductName = strtrim(ProductName,30))
 
 # Create a dot plot that shows the variation of cost within the top 5 Products
 
-ggplot(top_5_products, aes(ScrapedIndexPrice, ProductName)) +
+first_chart<- ggplot(top_3_products, aes(ScrapedIndexPrice, ProductName)) +
   geom_point(aes(color = ScrapedIndexVendor)) +
   scale_x_continuous(breaks = seq(0, 75, 5)) + 
   labs(color = "Vendor") +
@@ -33,22 +27,13 @@ ggplot(top_5_products, aes(ScrapedIndexPrice, ProductName)) +
 
 ## Second Chart
 
-# Load Amazon 250 best selling products data from data downloaded in Github
-amazon_data <- read.csv(
-  paste("https://raw.githubusercontent.com/info201b-au20/project-",
-        "AmazonPricing/gh-pages/data/Amazon-Ranking-Analysis.csv?token=",
-        "AKQ3B6Q3UEQDBPM4IBQS3B27W2R5W",
-        sep = ""
-  )
-)
-
 # calculate the log ratio of corrected price to Buy Box corrected price
 corrected_price_to_BBs_ratios <- amazon_data %>%
 mutate(CorrectedToBBCorrectedRatio = amazon_data$CorrectedPrice / amazon_data$BBCorrectedPrice) %>%
   select(Index, CorrectedPrice, BBCorrectedPrice, CorrectedToBBCorrectedRatio, ScrapedIndexVendorType, BBVendorType)
 
 # create the Faceted histogram
-ggplot(data = corrected_price_to_BBs_ratios) +
+second_chart<- ggplot(data = corrected_price_to_BBs_ratios) +
   geom_point(mapping = aes(x = Index , y = CorrectedToBBCorrectedRatio)) +
   facet_wrap(~ScrapedIndexVendorType) +
   ggtitle(paste("Distribution of Price ratio of All Vendor Listings",
@@ -64,7 +49,7 @@ ggplot(data = corrected_price_to_BBs_ratios) +
 # so BB product is more likely to be amazon's product?
 # FBA's price is trying to align with BBprice. or above.
 # but looking at other vendors', they would have many prices that's lower than BBprice.
-
+corrected_price_to_BBs_ratios <- corrected_price_to_BBs_ratios %>% 
 mutate(PriceLogRatio = log(amazon_data$CorrectedPrice / amazon_data$BBCorrectedPrice)) %>%
 select(Index, CorrectedPrice, BBCorrectedPrice, PriceLogRatio, ScrapedIndexVendorType, BBVendorType)
 
@@ -82,12 +67,12 @@ ggplot(data = corrected_price_to_BBs_ratios, aes(x = PriceLogRatio)) +
 
 # create a dataset
 # Load data from GitHub
-source("aggregate_table.R")
+source("scripts/aggregate_table.R")
 
 top_20_index_ratios <- aggregate_table %>%
   filter(ScrapedIndex <= 20)
 
-ggplot(top_20_index_ratios, aes(fill = BBVendorType, y = ratio,
+third_chart<- ggplot(top_20_index_ratios, aes(fill = BBVendorType, y = ratio,
                                 x = ScrapedIndex)) +
   geom_bar(position = "fill", stat = "identity") +
   ggtitle(paste("Vendor Types for top 20 Indexed Products on Amazon ",
@@ -153,13 +138,6 @@ aggregate_table$BBVendorType[aggregate_table$BBVendorType == "O"] <-
 ## Summary Information
 
 # Load dataset from Github
-amazon_data <- read.csv(
-  paste("https://raw.githubusercontent.com/info201b-au20/project-",
-        "AmazonPricing/gh-pages/data/Amazon-Ranking-Analysis.csv?token=",
-        "AKQ3B6Q3UEQDBPM4IBQS3B27W2R5W",
-        sep = ""
-  )
-)
 summary_info <- list()
 
 # Calculate the total number of rows in the dataset
