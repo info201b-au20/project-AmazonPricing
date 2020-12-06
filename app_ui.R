@@ -1,6 +1,6 @@
 # Libraries
-library(plotly)
-library(shiny)
+library("plotly")
+library("shiny")
 
 
 # Define a variable `ui` storing a `navbarPage()` element containing
