@@ -14,15 +14,27 @@ source("app_server.R")
 ############################# END SECOND CHART ###############################
 
 ############################ START THIRD CHART ##############################
-pie_sidebar_content <- 
+pie_sidebar_content <-
   sliderInput("indices", "Indices to include",
               min = 1, max = 162, value = c(1, 162),
-              width = '500px'
+              width = '100%'
   )
 
 pie_main_content <- mainPanel(
-  plotlyOutput("pie"), 
-  pie_sidebar_content
+  plotlyOutput("pie"),
+  pie_sidebar_content,
+  tags$p(paste(
+    "This pie chart shows the percentage of each vendor type for the 250",
+         "Amazon products in the data set. The different vendor types are",
+         "sold and fulfilled by amazon, only fulfilled by amazon, and",
+         "neither sold nor fulfilled by amazon. To clarify, only fulfilled",
+         "by amazon means the product is sold by a third party seller then",
+         "shipped by amazon. For each of the 250 products, there are multiple",
+         "sellers. The dataset records the order that Amazon ranks the same",
+         "product sold by different sellers with an index. The slider below",
+         "the pie chart allows you to see the percentage of each vendor type",
+         "for different index ranges.", sep = " ")
+  )
 )
 
 third_chart_panel <- tabPanel(
