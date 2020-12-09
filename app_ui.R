@@ -2,12 +2,42 @@
 library(plotly)
 library(shiny)
 library(stringr)
+library(shinythemes)
 source("app_server.R")
 
 ############################ START INTRO PANEL ##############################
 ############################# END INTRO PANEL ###############################
 
 ############################ START FIRST CHART ##############################
+prices_sidebar_content <- sidebarPanel(
+  titlePanel("Filter"),
+  selectInput(
+    inputId = "product_name",
+    label = "Select a Product",
+    choices = product
+  ),
+  radioButtons(
+    inputId = "color_input",
+    label = "Select a Color",
+    choices = c("Purple", "Magenta")
+  )
+)
+prices_main_content <- mainPanel(
+  plotlyOutput("price_chart"),
+  p("This interactive chart demonstrates the price variation given a particular
+    product. For each of the 250 products in the database, this chart displays
+    all of the prices and vendors for a chosen product. To clarify, this chart
+    does not filter or take into consideration the different fullfilment types.
+    From this chart, we can conlude that it is important to look at the 
+    different vendors for each product to ensure that you are not overpaying.")
+)
+first_chart_panel <- tabPanel(
+  "Price Variation",
+  titlePanel("Price Variation Per Product"),
+  sidebarLayout(
+    prices_sidebar_content,
+    prices_main_content)
+)
 ############################# END FIRST CHART ###############################
 
 ############################ START SECOND CHART ##############################
@@ -71,9 +101,10 @@ summary_panel <- tabPanel(
 # Define a variable `ui` storing a `navbarPage()` element containing
 # your the pages defined above
 ui <- navbarPage(
+  theme = shinytheme("united"),
   "Amazon Pricing",
   # introduction_panel,
-  # first_chart_panel, 
+   first_chart_panel, 
   # second_chart_panel, 
   third_chart_panel,
   summary_panel
