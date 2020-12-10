@@ -8,7 +8,7 @@ source("app_server.R")
 ############################ START INTRO PANEL ##############################
 intro_main <- fluidPage( #mainPanel(
   #ouput$image <- renderUI({
-  tags$img(src='amazon.png', height=414, width=432),
+  tags$img(src='img/amazon.png', height=414, width=432),
   h1("Introduction"),
   p("The purpose of this project is to analyze Amazon's anti-competitive practices
     and pricing. Considering Amazon's powerful presence in the e-commerce industry, 
