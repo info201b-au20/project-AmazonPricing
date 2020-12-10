@@ -6,10 +6,10 @@ library(shinythemes)
 source("app_server.R")
 
 ############################ START INTRO PANEL ##############################
-intro_main <- mainPanel(
-  ouput$image <- renderUI({
-    tags$img(src='amazon.png', height=414, width=432), 
-  h1("Introduction"), 
+intro_main <- fluidPage( #mainPanel(
+  #ouput$image <- renderUI({
+  tags$img(src='amazon.png', height=414, width=432),
+  h1("Introduction"),
   p("The purpose of this project is to analyze Amazon's anti-competitive practices
     and pricing. Considering Amazon's powerful presence in the e-commerce industry, 
     we found that analyzing this data would help us gain insight into the company's
@@ -31,9 +31,14 @@ intro_main <- mainPanel(
     vendors?* or *Does Amazon price their products lower than similar products sold by 
     third party vendors?* These questions helped guide us through our analysis of the
     Amazon Product Pricing Dataset, giving us insight into what the relationship
-    between products and various vendors on Amazon really is."), 
+    between products and various vendors on Amazon really is."),
   p("Throughout this report, you will be able to navigate various elements allowing
-    you to understand the dataset under different conditions.") 
+    you to understand the dataset under different conditions.")
+)
+
+introduction_panel <- tabPanel(
+  "Introduction",
+  intro_main,
 )
 ############################# END INTRO PANEL ###############################
 
@@ -132,7 +137,7 @@ summary_panel <- tabPanel(
 ui <- navbarPage(
   theme = shinytheme("united"),
   "Amazon Pricing",
-  # introduction_panel,
+  introduction_panel,
    first_chart_panel, 
   # second_chart_panel, 
   third_chart_panel,
