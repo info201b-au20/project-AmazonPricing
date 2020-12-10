@@ -2,7 +2,7 @@ library(tidyverse)
 
 # Load the data from GitHub
 
-amazon_data <- read.csv("https://raw.githubusercontent.com/info201b-au20/project-AmazonPricing/gh-pages/data/Amazon-Ranking-Analysis.csv?token=ARIOKKKUVW5AWQDWHRFCD427ZXB26")
+amazon_data <- read.csv("https://raw.githubusercontent.com/info201b-au20/project-AmazonPricing/gh-pages/data/Amazon-Ranking-Analysis.csv?token=ARKFBA4ZRBMPOJE5BZF3RVS73LM4O")
 
 ## First Chart
 
@@ -28,55 +28,7 @@ first_chart <- ggplot(top_3_products, aes(ScrapedIndexPrice, ProductName)) +
 
 ## Second Chart
 
-# calculate the log ratio of corrected price to Buy Box corrected price
-corrected_price_to_BBs_ratios <- amazon_data %>%
-  mutate(
-    CorrectedToBBCorrectedRatio =
-      amazon_data$CorrectedPrice / amazon_data$BBCorrectedPrice
-  ) %>%
-  select(
-    Index, CorrectedPrice, BBCorrectedPrice, CorrectedToBBCorrectedRatio,
-    ScrapedIndexVendorType, BBVendorType
-  )
-
-# create the Faceted histogram
-second_chart <- ggplot(data = corrected_price_to_BBs_ratios) +
-  geom_point(mapping = aes(x = Index, y = CorrectedToBBCorrectedRatio)) +
-  facet_wrap(~ScrapedIndexVendorType) +
-  ggtitle(paste("Distribution of Price ratio of All Vendor Listings",
-    sep = ""
-  )) +
-  xlab("Scraped Index of Products") +
-  ylab("Ratio")
-
-# todo: color dots : == 1 / >1 / <1
-# Simple Summary:
-# the chart suggests that most of BB product price is the same
-# as amazon's own product's.
-# so BB product is more likely to be amazon's product?
-# FBA's price is trying to align with BBprice. or above.but looking at other
-# vendors', they would have many prices that's lower than BBprice.
-corrected_price_to_BBs_ratios <- corrected_price_to_BBs_ratios %>%
-  mutate(
-    PriceLogRatio =
-      log(amazon_data$CorrectedPrice / amazon_data$BBCorrectedPrice)
-  ) %>%
-  select(
-    Index, CorrectedPrice, BBCorrectedPrice, PriceLogRatio,
-    ScrapedIndexVendorType, BBVendorType
-  )
-
-# create the Faceted histogram
-# x-axis is log ratio of corrected price to Buy Box corrected price
-# y-axis is the count of listings
-# highlighted the Buy Box corrected price
-ggplot(data = corrected_price_to_BBs_ratios, aes(x = PriceLogRatio)) +
-  geom_histogram(
-    binwidth = 0.1,
-    aes(fill = (PriceLogRatio >= -0.05 & PriceLogRatio <= 0.05))
-  ) +
-  facet_wrap(~ScrapedIndexVendorType, scales = "free_y")
-
+source("scripts/second_chart.R")
 
 ## Third Chart
 

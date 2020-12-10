@@ -1,7 +1,7 @@
 library("tidyverse")
 
 # Load data from GitHub
-amazon_data <- amazon_data <- read.csv("https://raw.githubusercontent.com/info201b-au20/project-AmazonPricing/gh-pages/data/Amazon-Ranking-Analysis.csv?token=ARIOKKKUVW5AWQDWHRFCD427ZXB26")
+amazon_data <- amazon_data <- read.csv("https://raw.githubusercontent.com/info201b-au20/project-AmazonPricing/gh-pages/data/Amazon-Ranking-Analysis.csv?token=ARKFBA4ZRBMPOJE5BZF3RVS73LM4O")
 
 
 get_ratio_of_vendor <- function(scraped_index, vendor) {
