@@ -7,6 +7,8 @@ source("app_server.R")
 
 ############################ START INTRO PANEL ##############################
 intro_main <- mainPanel(
+  ouput$image <- renderUI({
+    tags$img(src='amazon.png, height=414, width=432), 
   h1("Introduction"), 
   p("The purpose of this project is to analyze Amazon's anti-competitive practices
     and pricing. Considering Amazon's powerful presence in the e-commerce industry, 
@@ -16,14 +18,22 @@ intro_main <- mainPanel(
     insight into the ranking system that's implemented through Amazon's software."),
   h3("Major Questions"),
   p("Since the start of our research in this domain, we formulated 5 questions which 
-    we have answered through our analysis. The first question we have successfully
-    answered through our analysis is, *What percentage of products on Amazon are sold 
-    by third-party sellers versus Amazon?* In answering this question, we utilized the
-    Amazon Product Pricing dataset accessed through the", a("ProPublica Data Store.", 
+    we have answered through our analysis. In answering these questions, we utilized 
+    the Amazon Product Pricing dataset accessed through the", a("ProPublica Data Store.", 
     href = "https://www.propublica.org/datastore/dataset/amazon-pricing-algorithm-data-set"),
     "This dataset helped us gauge a well-rounded understanding of the products on Amazon's
-    interface and how various vendors play into the selling of identical products.")
-  p("The second question we posed...")
+    interface and how various vendors play into the selling of identical products. The first 
+    question we cover is *How does Amazon's pricing algorithm help customers, third party
+    sellers and Amazon itself?* The second question we have successfully answered through 
+    our analysis is, *What percentage of products on Amazon are sold by third-party sellers
+    versus Amazon?* Our third and final posed question answered by our report is, *Does 
+    Amazon rank their own products above similarly priced products sold by third party 
+    vendors?* or *Does Amazon price their products lower than similar products sold by 
+    third party vendors?* These questions helped guide us through our analysis of the
+    Amazon Product Pricing Dataset, giving us insight into what the relationship
+    between products and various vendors on Amazon really is."), 
+  p("Throughout this report, you will be able to navigate various elements allowing
+    you to understand the dataset under different conditions.") 
 )
 ############################# END INTRO PANEL ###############################
 
