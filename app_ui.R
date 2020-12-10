@@ -6,9 +6,11 @@ library(shinythemes)
 source("app_server.R")
 
 ############################ START INTRO PANEL ##############################
-intro_main <- fluidPage( #mainPanel(
+
+intro_main <- fluidPage( 
+  img(src='amazon.png', height=310, width=415),
   #ouput$image <- renderUI({
-  tags$img(src='img/amazon.png', height=414, width=432),
+  #tags$img(src="./img/amazon.png", height=414, width=432),
   h1("Introduction"),
   p("The purpose of this project is to analyze Amazon's anti-competitive practices
     and pricing. Considering Amazon's powerful presence in the e-commerce industry, 
@@ -38,7 +40,7 @@ intro_main <- fluidPage( #mainPanel(
 
 introduction_panel <- tabPanel(
   "Introduction",
-  intro_main,
+  intro_main
 )
 ############################# END INTRO PANEL ###############################
 
