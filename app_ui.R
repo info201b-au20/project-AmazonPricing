@@ -9,8 +9,6 @@ source("app_server.R")
 
 intro_main <- fluidPage( 
   img(src='amazon.png', height=310, width=415),
-  #ouput$image <- renderUI({
-  #tags$img(src="./img/amazon.png", height=414, width=432),
   h1("Introduction"),
   p("The purpose of this project is to analyze Amazon's anti-competitive practices
     and pricing. Considering Amazon's powerful presence in the e-commerce industry, 
@@ -113,13 +111,32 @@ third_chart_panel <- tabPanel(
 
 ############################ START SUMMARY PANEL ##############################
 summary_main_content <- mainPanel(
-  tags$p(
-    paste(
-      "This is just random text now but we should fill it in with",
-      "observations from the three charts above (one from each).",
-      sep = " "
-    )
-  )
+  p("After analyzing Amazon listings for 250 bestselling products across a wide
+    range of categories in 2016, we found three major takeaways. First, we
+    analyzed the percentage of each vendor type for the 250 Amazon products.
+    The different vendor types are sold and fulfilled by amazon, only
+    fulfilled by amazon, and neither sold nor fulfilled by amazon.
+    To clarify, only fulfilled by amazon means the product is sold by a
+    third party seller then shipped by amazon. For each of the 250 products,
+    there are multiple sellers. The dataset records the order that Amazon
+    ranks the same product sold by different sellers with an index. Through the
+    interactive pie chart under the Analyze by Vendor Type tab, we were able to
+    see that allowed us to discover that an overwhelming percentage of listings
+    are sold and fulfilled by Amazon: 76.4% of the top 20 indexed products
+    across all categories were sold and fulfilled by Amazon whereas only 10.5%
+    and 13.1% of listings were not sold or fulfilled by Amazon and fulfilled by
+    Amazon, respectively. The percentage of listings sold and fulfilled by
+    Amazon increased for each subsequent range. Indices 20-40 had a percentage
+    of 87.7, and 40-60 had a percentage of 94.8. To summarize, a large
+    percentage of listings in our dataset were consistantly sold and
+    fulfilled by Amazon across all index ranges. This realization made us
+    question Amazon's Marketplace. Amazon Marketplace is their third-party
+    retailer market integrated into their platform. It claims to offer
+    customers a much wider product choice from thousands of external sellers,
+    which in turn,  enables price comparison to keep the platform competitive.
+    However, it seems to us Amazon's Marketplace isn't making customers product
+    choices that much wider because the majority of listings in our dataset
+    seem to be sold and fulfilled by Amazon.")
 )
 
 summary_panel <- tabPanel(
