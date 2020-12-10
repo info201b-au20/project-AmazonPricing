@@ -33,6 +33,3 @@ second_chart <- ggplot(data = corrected_price_to_BBs_ratios, aes(x = PriceLogRat
   guides(fill = guide_legend(title="BuyBox")) +
   #scale_fill_manual(values = c(`TRUE` = "magenta4", `FALSE` = alpha("grey", 0.7))) +
   facet_wrap(~ScrapedIndexVendorType, scales = "free_y") 
-
-
-

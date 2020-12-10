@@ -60,6 +60,7 @@ first_chart_panel <- tabPanel(
 ############################# END FIRST CHART ###############################
 
 ############################ START SECOND CHART ##############################
+source("scripts/second_chart_panel.R")
 ############################# END SECOND CHART ###############################
 
 ############################ START THIRD CHART ##############################
@@ -124,7 +125,7 @@ ui <- navbarPage(
   "Amazon Pricing",
   # introduction_panel,
    first_chart_panel, 
-  # second_chart_panel, 
+  second_chart_panel, 
   third_chart_panel,
   summary_panel
 )

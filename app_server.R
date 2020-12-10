@@ -8,8 +8,11 @@ library(plotly)
 amazon_data <- read.csv("./data/Amazon-Ranking-Analysis.csv", stringsAsFactors = FALSE)
 
 product <- unique(amazon_data$ProductName)
+max_price_range <- max(amazon_data$CorrectedPrice)
+min_price_range <- min(amazon_data$CorrectedPrice)
 
 source("./scripts/build_pie.R")
+source("./scripts/second_chart.R")
 
 # Start shinyServer
 server <- function(input, output) {
@@ -23,5 +26,11 @@ server <- function(input, output) {
                  color = input$color_input) + xlab("Price ($)") + ylab("Vendor")
     
     ggplotly(plot)
+  })
+  output$second_chart <- renderPlotly({
+    return(ggplotly(make_second_chart(
+      amazon_data,
+      input$price_range_slider[1],
+      input$price_range_slider[2])))
   })
 }
