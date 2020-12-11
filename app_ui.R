@@ -146,7 +146,26 @@ summary_main_content <- mainPanel(
     as well as get a visual of how much price variation there is in that single
     product. From this interactive graph, we have learned that customers need to
     be conscious of the price variation of products when shoping on Amazon since
-    there is a lot of variation in some of the products.")
+    there is a lot of variation in some of the products."),
+  p("The third takeaway that we found is from the distribution of price listings 
+    by each vendor type and its relationship with the Buy Box price (Buy Box 
+    product pops up first as a suggested purchase on Amazon's virtual shelves). 
+    Overall, the product listings both sold and fulfilled by Amazon are mostly 
+    aligned with the Buy Box price. For those only fulfilled by amazon but sold 
+    by third party has more listings that are more expensive than Buy Box price 
+    and little listings that are cheaper. However, among the listings neither 
+    sold nor fulfilled by amazon, significantly more listings are cheaper than 
+    their Buy Box price.By adjusting the products' price-range, users have a 
+    more detailed view of a particular price range's products. For example, 
+    graphs show that for lower price range products (roughly $2 - $100), those 
+    neither sold nor fulfilled by amazon has more listings that are cheaper 
+    than Buy Box price. 
+    We have learned, especially for these low price-range products, 
+    shoppers might be less likely to choose the lower-priced product because 
+    it is not the Buy Box product (suggested by Amazon). Products neither sold 
+    nor fulfilled by amazon are less likely to be the Buy box product even with 
+    its low price.
+    ")
 )
 
 summary_panel <- tabPanel(

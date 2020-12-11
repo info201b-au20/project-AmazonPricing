@@ -35,7 +35,7 @@ prices_main_content_pyt <- mainPanel(
   prices_sidebar_content_pyt,
   p(" "),
   p("This faceted histogram show the ",
-    strong("distribution of each vender type"), 
+    strong("distribution of each vendor type"), 
     "for 250 best selling products' all price listings from the dataset"),
   p(strong("Buy Box"), "Price listings is highlighted in cyan.", 
     span(em("Buy box"),
