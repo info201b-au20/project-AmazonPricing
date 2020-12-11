@@ -2,7 +2,7 @@ library(tidyverse)
 
 # Load the data from GitHub
 
-amazon_data <- read.csv("https://raw.githubusercontent.com/info201b-au20/project-AmazonPricing/gh-pages/data/Amazon-Ranking-Analysis.csv?token=ARKFBA4ZRBMPOJE5BZF3RVS73LM4O")
+amazon_data <- read.csv("https://raw.githubusercontent.com/info201b-au20/project-AmazonPricing/gh-pages/data/Amazon-Ranking-Analysis.csv?token=ARIOKKKUVW5AWQDWHRFCD427ZXB26")
 
 ## First Chart
 

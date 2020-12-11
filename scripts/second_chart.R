@@ -14,7 +14,7 @@ library("tidyverse")
 amazon_data <- read.csv(
   paste("https://raw.githubusercontent.com/info201b-au20/project-",
         "AmazonPricing/gh-pages/data/Amazon-Ranking-Analysis.csv?token=",
-        "ARKFBA53SSICTNT7LNMVVF273LK4G",
+        "AKQ3B6Q3UEQDBPM4IBQS3B27W2R5W",
         sep = ""
   )
 )
