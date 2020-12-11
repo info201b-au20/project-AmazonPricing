@@ -138,7 +138,15 @@ summary_main_content <- mainPanel(
     However, it seems to us Amazon's Marketplace isn't making customers product
     choices that much wider because the majori,ty of listings in our dataset
     seem to be sold and fulfilled by Amazon."),
-  p("The ")
+  p("The second takeaway that we had from this project came from the price 
+    comparision of the products. In a previous version of this website, we had
+    compared four products to demonstrate that they were being sold by multiple
+    vendors at varying prices. In our new more refined graph, we allow the user
+    to chose a specific product and see how many different vendors are selling
+    as well as get a visual of how much price variation there is in that single
+    product. From this interactive graph, we have learned that customers need to
+    be conscious of the price variation of products when shoping on Amazon since
+    there is a lot of variation in some of the products.")
 )
 
 summary_panel <- tabPanel(
