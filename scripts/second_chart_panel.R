@@ -12,7 +12,7 @@ make_second_chart <- function(data, min_price = -99999999, max_price = 999999999
   # highlighted the Buy Box corrected price
   second_chart_local <- ggplot(data = corrected_price_to_BBs_ratios_local, aes(x = PriceLogRatio)) +
     labs(
-      title = ("Comparing Buy Box Pirce with All listings from Amazon 250 Best Selling Products Data"),
+      title = ("Comparing Buy Box Price with All listings from Amazon 250 Best Selling Products Data"),
       y = "Count of Listings ", x = "Distribution"
     ) +
     # theme(title = element_text(color = alpha("blue", 0.5), face = "bold")) +
