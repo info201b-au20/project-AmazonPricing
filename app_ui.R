@@ -136,8 +136,9 @@ summary_main_content <- mainPanel(
     customers a much wider product choice from thousands of external sellers,
     which in turn,  enables price comparison to keep the platform competitive.
     However, it seems to us Amazon's Marketplace isn't making customers product
-    choices that much wider because the majority of listings in our dataset
-    seem to be sold and fulfilled by Amazon.")
+    choices that much wider because the majori,ty of listings in our dataset
+    seem to be sold and fulfilled by Amazon."),
+  p("The ")
 )
 
 summary_panel <- tabPanel(
