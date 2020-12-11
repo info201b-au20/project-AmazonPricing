@@ -6,8 +6,10 @@ library(shinythemes)
 source("app_server.R")
 
 ############################ START INTRO PANEL ##############################
-intro_main <- mainPanel(
-  h1("Introduction"), 
+
+intro_main <- fluidPage( 
+  img(src='amazon.png', height=310, width=415),
+  h1("Introduction"),
   p("The purpose of this project is to analyze Amazon's anti-competitive practices
     and pricing. Considering Amazon's powerful presence in the e-commerce industry, 
     we found that analyzing this data would help us gain insight into the company's
@@ -16,14 +18,27 @@ intro_main <- mainPanel(
     insight into the ranking system that's implemented through Amazon's software."),
   h3("Major Questions"),
   p("Since the start of our research in this domain, we formulated 5 questions which 
-    we have answered through our analysis. The first question we have successfully
-    answered through our analysis is, *What percentage of products on Amazon are sold 
-    by third-party sellers versus Amazon?* In answering this question, we utilized the
-    Amazon Product Pricing dataset accessed through the", a("ProPublica Data Store.", 
+    we have answered through our analysis. In answering these questions, we utilized 
+    the Amazon Product Pricing dataset accessed through the", a("ProPublica Data Store.", 
     href = "https://www.propublica.org/datastore/dataset/amazon-pricing-algorithm-data-set"),
     "This dataset helped us gauge a well-rounded understanding of the products on Amazon's
-    interface and how various vendors play into the selling of identical products.")
-  p("The second question we posed...")
+    interface and how various vendors play into the selling of identical products. The first 
+    question we cover is *How does Amazon's pricing algorithm help customers, third party
+    sellers and Amazon itself?* The second question we have successfully answered through 
+    our analysis is, *What percentage of products on Amazon are sold by third-party sellers
+    versus Amazon?* Our third and final posed question answered by our report is, *Does 
+    Amazon rank their own products above similarly priced products sold by third party 
+    vendors?* or *Does Amazon price their products lower than similar products sold by 
+    third party vendors?* These questions helped guide us through our analysis of the
+    Amazon Product Pricing Dataset, giving us insight into what the relationship
+    between products and various vendors on Amazon really is."),
+  p("Throughout this report, you will be able to navigate various elements allowing
+    you to understand the dataset under different conditions.")
+)
+
+introduction_panel <- tabPanel(
+  "Introduction",
+  intro_main
 )
 ############################# END INTRO PANEL ###############################
 
@@ -97,13 +112,32 @@ third_chart_panel <- tabPanel(
 
 ############################ START SUMMARY PANEL ##############################
 summary_main_content <- mainPanel(
-  tags$p(
-    paste(
-      "This is just random text now but we should fill it in with",
-      "observations from the three charts above (one from each).",
-      sep = " "
-    )
-  )
+  p("After analyzing Amazon listings for 250 bestselling products across a wide
+    range of categories in 2016, we found three major takeaways. First, we
+    analyzed the percentage of each vendor type for the 250 Amazon products.
+    The different vendor types are sold and fulfilled by amazon, only
+    fulfilled by amazon, and neither sold nor fulfilled by amazon.
+    To clarify, only fulfilled by amazon means the product is sold by a
+    third party seller then shipped by amazon. For each of the 250 products,
+    there are multiple sellers. The dataset records the order that Amazon
+    ranks the same product sold by different sellers with an index. Through the
+    interactive pie chart under the Analyze by Vendor Type tab, we were able to
+    see that allowed us to discover that an overwhelming percentage of listings
+    are sold and fulfilled by Amazon: 76.4% of the top 20 indexed products
+    across all categories were sold and fulfilled by Amazon whereas only 10.5%
+    and 13.1% of listings were not sold or fulfilled by Amazon and fulfilled by
+    Amazon, respectively. The percentage of listings sold and fulfilled by
+    Amazon increased for each subsequent range. Indices 20-40 had a percentage
+    of 87.7, and 40-60 had a percentage of 94.8. To summarize, a large
+    percentage of listings in our dataset were consistantly sold and
+    fulfilled by Amazon across all index ranges. This realization made us
+    question Amazon's Marketplace. Amazon Marketplace is their third-party
+    retailer market integrated into their platform. It claims to offer
+    customers a much wider product choice from thousands of external sellers,
+    which in turn,  enables price comparison to keep the platform competitive.
+    However, it seems to us Amazon's Marketplace isn't making customers product
+    choices that much wider because the majority of listings in our dataset
+    seem to be sold and fulfilled by Amazon.")
 )
 
 summary_panel <- tabPanel(
@@ -123,7 +157,7 @@ summary_panel <- tabPanel(
 ui <- navbarPage(
   theme = shinytheme("united"),
   "Amazon Pricing",
-  # introduction_panel,
+  introduction_panel,
    first_chart_panel, 
   second_chart_panel, 
   third_chart_panel,
