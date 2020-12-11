@@ -173,7 +173,9 @@ summary_main_content <- mainPanel(
     products, shoppers might be less likely to choose the lower-priced product
     because it is not the Buy Box product (suggested by Amazon). Products
     neither sold nor fulfilled by amazon are less likely to be the Buy box
-    product even with its low price.")
+    product even with its low price."),
+ h4("Project Created By: Sydney Smith, Megan Clay, Alexis MacAskill, 
+    Yutian Pan")
 )
 
 summary_panel <- tabPanel(
