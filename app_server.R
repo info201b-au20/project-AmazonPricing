@@ -12,7 +12,6 @@ max_price_range <- max(amazon_data$CorrectedPrice)
 min_price_range <- min(amazon_data$CorrectedPrice)
 
 source("./scripts/build_pie.R")
-source("./scripts/second_chart.R")
 
 # Start shinyServer
 server <- function(input, output) {
@@ -28,8 +27,7 @@ server <- function(input, output) {
     ggplotly(plot)
   })
   output$second_chart <- renderPlotly({
-    return(ggplotly(make_second_chart(
-      amazon_data,
+    return(ggplotly(make_second_chart(amazon_data,
       input$price_range_slider[1],
       input$price_range_slider[2])))
   })
