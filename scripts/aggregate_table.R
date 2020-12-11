@@ -7,17 +7,17 @@ amazon_data <- amazon_data <- read.csv("https://raw.githubusercontent.com/info20
 get_ratio_of_vendor <- function(scraped_index, vendor) {
   if (vendor == "Amazon") {
     nrow(amazon_data %>%
-           filter(BBVendorType == "Amazon") %>%
-           filter(ScrapedIndex == scraped_index)) / 250
+      filter(BBVendorType == "Amazon") %>%
+      filter(ScrapedIndex == scraped_index)) / 250
   }
   else if (vendor == "FBA") {
     nrow(amazon_data %>%
-           filter(BBVendorType == "FBA") %>%
-           filter(ScrapedIndex == scraped_index)) / 250
+      filter(BBVendorType == "FBA") %>%
+      filter(ScrapedIndex == scraped_index)) / 250
   } else {
     nrow(amazon_data %>%
-          filter(BBVendorType == "O") %>%
-          filter(ScrapedIndex == scraped_index)) / 250
+      filter(BBVendorType == "O") %>%
+      filter(ScrapedIndex == scraped_index)) / 250
   }
 }
 

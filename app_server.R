@@ -5,7 +5,9 @@ library(plotly)
 
 
 # Read in data
-amazon_data <- read.csv("./data/Amazon-Ranking-Analysis.csv", stringsAsFactors = FALSE)
+amazon_data <- read.csv("./data/Amazon-Ranking-Analysis.csv",
+  stringsAsFactors = FALSE
+)
 
 product <- unique(amazon_data$ProductName)
 max_price_range <- max(amazon_data$CorrectedPrice)
@@ -20,15 +22,22 @@ server <- function(input, output) {
     return(build_pie(amazon_data, input$indices))
   })
   output$price_chart <- renderPlotly({
-    plot <- ggplot(data = amazon_data %>% filter(ProductName == input$product_name)) +
-      geom_point(mapping = aes(x = ScrapedIndexPrice, y = ScrapedIndexVendor),
-                 color = input$color_input) + xlab("Price ($)") + ylab("Vendor")
-    
+    plot <- ggplot(data = amazon_data %>%
+      filter(ProductName == input$product_name)) +
+      geom_point(
+        mapping = aes(x = ScrapedIndexPrice, y = ScrapedIndexVendor),
+        color = input$color_input
+      ) +
+      xlab("Price ($)") +
+      ylab("Vendor")
+
     ggplotly(plot)
   })
   output$second_chart <- renderPlotly({
-    return(ggplotly(make_second_chart(amazon_data,
+    return(ggplotly(make_second_chart(
+      amazon_data,
       input$price_range_slider[1],
-      input$price_range_slider[2])))
+      input$price_range_slider[2]
+    )))
   })
 }
